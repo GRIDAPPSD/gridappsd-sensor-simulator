@@ -1,2 +1,2 @@
 SPARQLWrapper
-gridappsd-python
+gridappsd-python>=1.0
