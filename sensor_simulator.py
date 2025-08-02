@@ -34,10 +34,10 @@ def get_opts():
     # parser.add_argument("--interval", type=float, default=30.0,
     #                     help="Interval in seconds for min, max, average aggregation.")
 
-    parser.add_argument("-u", "--username", default=utils.get_gridappsd_user(),
-                        help="The username to authenticate with the message bus.")
-    parser.add_argument("-p", "--password", default=utils.get_gridappsd_pass(),
-                        help="The password to authenticate with the message bus.")
+    #parser.add_argument("-u", "--username", default=utils.get_gridappsd_user(),
+    #                    help="The username to authenticate with the message bus.")
+    #parser.add_argument("-p", "--password", default=utils.get_gridappsd_pass(),
+    #                    help="The password to authenticate with the message bus.")
     parser.add_argument("-a", "--address", default=utils.get_gridappsd_address(),
                         help="The tcp://addr:port that gridappsd is located on.")
     opts = parser.parse_args()
