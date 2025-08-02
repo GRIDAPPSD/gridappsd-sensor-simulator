@@ -42,7 +42,6 @@ def get_opts():
                         help="The tcp://addr:port that gridappsd is located on.")
     opts = parser.parse_args()
     opts.log_level = 'DEBUG'
-    logging.getLogger().info(f"OPTS Request: {opts.request}")
 
     if opts.log_level == 'DEBUG':
         opts.log_level = logging.DEBUG
@@ -59,6 +58,8 @@ def get_opts():
 
     assert opts.request, "request must be passed."
 
+    logging.getLogger().info(f"OPTS Request: {opts.request}")
+    print("OPTS REQUEST "+str(opts.request))
     opts.request = json.loads(opts.request)
 
     return opts
