@@ -42,6 +42,7 @@ def get_opts():
                         help="The tcp://addr:port that gridappsd is located on.")
     opts = parser.parse_args()
     opts.log_level = 'DEBUG'
+    logging.getLogger().info(f"OPTS Request: {opts.request}")
 
     if opts.log_level == 'DEBUG':
         opts.log_level = logging.DEBUG
@@ -49,7 +50,7 @@ def get_opts():
         opts.log_level = logging.INFO
     elif opts.log_level == 'ERROR':
         opts.log_level = logging.ERROR
-    elif ops.log_level == 'WARNING' or opts.log_level == 'WARN':
+    elif opts.log_level == 'WARNING' or opts.log_level == 'WARN':
         opts.log_level = logging.WARNING
     elif opts.log_level == 'CRITICAL':
         opts.log_level = logging.CRITICAL
