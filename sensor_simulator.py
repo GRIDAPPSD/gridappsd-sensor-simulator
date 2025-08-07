@@ -79,7 +79,7 @@ if __name__ == '__main__':
         if configs['id'] == 'gridappsd-sensor-simulator':
             user_options = configs['user_options']
             break
-        
+
     feeder = opts.request['power_system_config']['Line_name']
     service_id = "gridappsd-sensor-simulator"
     gapp = GridAPPSD(address=opts.address)
@@ -98,7 +98,7 @@ if __name__ == '__main__':
 
     meas = Measurements()
     meta = meas.get_sensors_meta(feeder)
-
+    
     with open(log_file, 'w') as fp:
         logging.basicConfig(stream=fp, level=logging.INFO)
         logging.getLogger().info("Almost ready to create sensors!")
