@@ -93,9 +93,7 @@ if __name__ == '__main__':
     service_id = "gridappsd-sensor-simulator"
     logging.getLogger().info(f"SERVICE ID {service_id}  {feeder}")
     print("SERVICE ID "+str(service_id)+" "+str(feeder))
-    gapp = GridAPPSD(username=opts.username,
-                     password=opts.password,
-                     address=opts.address)
+    gapp = GridAPPSD(address=opts.address)
     
     #gapp.get_logger().setLevel(opts.log_level)
     read_topic = simulation_output_topic(opts.simulation_id)
