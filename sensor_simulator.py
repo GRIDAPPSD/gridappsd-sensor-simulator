@@ -80,15 +80,19 @@ if __name__ == '__main__':
     os.environ['GRIDAPPSD_APPLICATION_STATUS'] = 'STARTED'
     os.environ['GRIDAPPSD_SIMULATION_ID'] = opts.simulation_id
     # find the user_options specifically for sensor-simulator
+    logging.getLogger().info(f"BEFORE SERVICE CONFIGS")
+    print("BEFORE SERVICE CONFIGS ")
     user_options = None
     for configs in opts.request['service_configs']:
         if configs['id'] == 'gridappsd-sensor-simulator':
             user_options = configs['user_options']
             break
-      
+    logging.getLogger().info(f"GOT CONFIGS {user_options}")
+    print("GOT CONFIGS  "+str(user_options))      
     feeder = opts.request['power_system_config']['Line_name']
     service_id = "gridappsd-sensor-simulator"
-
+    logging.getLogger().info(f"SERVICE ID {service_id}  {feeder}")
+    print("SERVICE ID "+str(service_id)+" "+str(feeder))
     gapp = GridAPPSD(username=opts.username,
                      password=opts.password,
                      address=opts.address)
@@ -96,7 +100,8 @@ if __name__ == '__main__':
     #gapp.get_logger().setLevel(opts.log_level)
     read_topic = simulation_output_topic(opts.simulation_id)
     write_topic = service_output_topic(service_id, opts.simulation_id)
-
+    logging.getLogger().info(f"AFTER TOPICS")
+    print(" AFTER TOPICS")
     log_file = "/tmp/gridappsd_tmp/{}/sensors.log".format(opts.simulation_id)
     if not os.path.exists(os.path.dirname(log_file)):
         os.makedirs(os.path.dirname(log_file))
@@ -105,9 +110,12 @@ if __name__ == '__main__':
     from pprint import pprint
     from sensors.measurements import Measurements
 
+    logging.getLogger().info(f"BEFORE MEAS")
+    print("BEFORE MEAS ")
     meas = Measurements()
     meta = meas.get_sensors_meta(feeder)
-    
+    logging.getLogger().info(f"AFTER MEAS")
+    print("AFTER MEAS ")
     with open(log_file, 'w') as fp:
         logging.basicConfig(stream=fp, level=logging.INFO)
         logging.getLogger().info("Almost ready to create sensors!")
@@ -116,4 +124,6 @@ if __name__ == '__main__':
         logging.getLogger().debug(f"Meta: {meta}")
         run_sensors = Sensors(gapp, read_topic=read_topic, write_topic=write_topic,
                               user_options=user_options, measurements=meta)
+        logging.getLogger().info(f"RUNNING MAIN LOOP")
+        print("RUNNING MAIN LOOP ")
         run_sensors.main_loop()
