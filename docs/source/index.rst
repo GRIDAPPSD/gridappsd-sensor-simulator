@@ -3,8 +3,8 @@
    You can adapt this file completely to your liking, but it should at least
    contain the root `toctree` directive.
 
-GridAPPSD's Sensor Simulator
-============================
+GridAPPS-D Sensor Simulator Service
+===================================
 
 .. toctree::
    :maxdepth: 3
