@@ -34,10 +34,6 @@ def get_opts():
     # parser.add_argument("--interval", type=float, default=30.0,
     #                     help="Interval in seconds for min, max, average aggregation.")
 
-    parser.add_argument("-u", "--username", default=utils.get_gridappsd_user(),
-                        help="The username to authenticate with the message bus.")
-    parser.add_argument("-p", "--password", default=utils.get_gridappsd_pass(),
-                        help="The password to authenticate with the message bus.")
     parser.add_argument("-a", "--address", default=utils.get_gridappsd_address(),
                         help="The tcp://addr:port that gridappsd is located on.")
     opts = parser.parse_args()
@@ -49,7 +45,7 @@ def get_opts():
         opts.log_level = logging.INFO
     elif opts.log_level == 'ERROR':
         opts.log_level = logging.ERROR
-    elif ops.log_level == 'WARNING' or opts.log_level == 'WARN':
+    elif opts.log_level == 'WARNING' or opts.log_level == 'WARN':
         opts.log_level = logging.WARNING
     elif opts.log_level == 'CRITICAL':
         opts.log_level = logging.CRITICAL
@@ -83,13 +79,10 @@ if __name__ == '__main__':
         if configs['id'] == 'gridappsd-sensor-simulator':
             user_options = configs['user_options']
             break
-      
+
     feeder = opts.request['power_system_config']['Line_name']
     service_id = "gridappsd-sensor-simulator"
-
-    gapp = GridAPPSD(username=opts.username,
-                     password=opts.password,
-                     address=opts.address)
+    gapp = GridAPPSD(address=opts.address)
     
     #gapp.get_logger().setLevel(opts.log_level)
     read_topic = simulation_output_topic(opts.simulation_id)
