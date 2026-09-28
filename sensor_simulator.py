@@ -80,7 +80,7 @@ if __name__ == '__main__':
             user_options = configs['user_options']
             break
 
-    feeder = opts.request['power_system_config']['Line_name']
+    feeder = opts.request['power_system_configs'][0]['Line_name']
     service_id = "gridappsd-sensor-simulator"
     gapp = GridAPPSD(address=opts.address)
     
